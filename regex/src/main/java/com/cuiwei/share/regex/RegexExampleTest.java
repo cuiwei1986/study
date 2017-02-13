@@ -7,6 +7,8 @@ import org.junit.Test;
 
 public class RegexExampleTest {
 
+    Pattern patternBlankTag = Pattern.compile("<([a-zA-Z]+)></\\1\\>");
+
     // data[-_]xxx去除
     @Test
     public void test0() {
@@ -19,7 +21,8 @@ public class RegexExampleTest {
     @Test
     public void test1() {
         String body = "<a><d></d></a><B><c>123</c></B>";
-        Matcher matcherBlankTag = Pattern.compile("<([a-zA-Z]+)></\\1\\>").matcher(body);
+        // 多次使用建议预编译 阿里推荐不要放在方法里
+        Matcher matcherBlankTag = patternBlankTag.matcher(body);
         while (matcherBlankTag.reset(body).find()) {
             body = matcherBlankTag.replaceAll("");
         }
