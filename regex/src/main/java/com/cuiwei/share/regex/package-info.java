@@ -1,10 +1,3 @@
-/**
- * 
- */
-/**
- * @author Mtime
- *
- */
 package com.cuiwei.share.regex;
 
 // 提纲
