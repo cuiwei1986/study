@@ -42,7 +42,8 @@ public class TimeServer {
 					if (body == null) {
 						break;
 					}
-					System.out.println("The time server receive order:" + body);
+					System.out.println("The time server" + socket.getInetAddress() + ":" + socket.getPort()
+							+ "receive order:" + body);
 					currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date().toString() : "BAD ORDER";
 					out.println(currentTime);
 				}

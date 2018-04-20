@@ -21,6 +21,7 @@ public class TimePoolServer {
 			TimeServerHandlerExecutePool singleExecutor = new TimeServerHandlerExecutePool(20,1000);
 			while (true) {
 				socket = server.accept();
+				System.out.println(socket.getInetAddress() + ":" + socket.getPort()+ "accept");
 				singleExecutor.execute(new TimeServerHandler(socket));
 			}
 		} catch (Exception e) {
