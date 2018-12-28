@@ -110,4 +110,22 @@ public class RegexCharsTest {
             System.out.println(matcher.group());
         }
     }
+    
+    // .  匹配除“\n”和"\r"之外的任何单个字符
+    // [\\s\\S] 匹配包括“\n”和"\r"在内的任何字符
+    @Test
+    public void test10() {
+        String str = "cat123\r\n\tabccat";
+        Pattern pattern = Pattern.compile("cat.*cat");
+        Matcher matcher = pattern.matcher(str);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
+        
+        Pattern pattern2 = Pattern.compile("cat[\\s\\S]*cat");
+        Matcher matcher2 = pattern2.matcher(str);
+        while (matcher2.find()) {
+            System.out.println(matcher2.group());
+        }
+    }
 }
