@@ -29,24 +29,26 @@ public class ThreadYieldTest {
         t2.start();
     }
 
-    // sleep()定义在Thread类内，当前线程休眠，即当前线程会从“运行状态”进入到“休眠(阻塞)状态”。
-    // sleep()会指定休眠时间，线程休眠的时间会大于/等于该休眠时间；在线程重新被唤醒时，它会由“阻塞状态”变成“就绪状态”，从而等待cpu的调度执行。
+    // yield() 与 wait()的比较
+    // wait()是让线程由“运行状态”进入到“等待(阻塞)状态”，而不yield()是让线程由“运行状态”进入到“就绪状态”。
+    // wait()是会线程释放它所持有对象的同步锁，而yield()方法不会释放锁。
 
+    private static Object obj = new Object();
+    
     static class ThreadB extends Thread {
         public ThreadB(String name) {
             super(name);
         }
 
-        public synchronized void run() {
-            try {
-                for (int i = 0; i < 10; i++) {
-                    System.out.printf("%s: %d\n", this.getName(), i);
-                    // i能被4整除时，休眠100毫秒
-                    if (i % 4 == 0)
-                        Thread.sleep(100);
+        public void run() {
+            // 获取obj对象的同步锁
+            synchronized (obj) {
+                for(int i=0; i <10; i++){ 
+                    System.out.printf("%s [%d]:%d\n", this.getName(), this.getPriority(), i); 
+                    // i整除4时，调用yield
+                    if (i%4 == 0)
+                        Thread.yield();
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
 
