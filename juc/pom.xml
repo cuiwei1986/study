@@ -10,10 +10,5 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>9.3.6.v20151106</version>
-		</dependency>
   </dependencies>
 </project>
