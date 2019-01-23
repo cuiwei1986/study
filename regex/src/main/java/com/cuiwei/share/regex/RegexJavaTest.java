@@ -6,6 +6,10 @@ import java.util.regex.Pattern;
 import org.junit.Test;
 
 public class RegexJavaTest {
+    
+    // 创建一个Pattern实例是昂贵的，因为它需要将正则表达式编译成一个有限状态机。
+    //为了改善性能，我们可以将所需的正则表达式显式地编译进一个不可变的Pattern对象里
+    private static final Pattern CA = Pattern.compile("ca");
 
     // matches 范围从开头到结束 相当于强制^...$
     @Test
@@ -29,7 +33,7 @@ public class RegexJavaTest {
     @Test
     public void test3() {
         String str = "catbca";
-        Matcher matcher = Pattern.compile("ca").matcher(str);
+        Matcher matcher = CA.matcher(str);
         while (matcher.find()) {
             System.out.println(matcher.group());
             System.out.println(matcher.start());
@@ -60,7 +64,7 @@ public class RegexJavaTest {
     @Test
     public void test6() {
         String str = "catcabcah";
-        Matcher matcher = Pattern.compile("ca").matcher(str);
+        Matcher matcher = CA.matcher(str);
         System.out.println(matcher.replaceAll("re"));
         System.out.println(matcher.replaceFirst("re"));
     }
